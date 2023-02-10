@@ -1,11 +1,17 @@
-import { Location, TreeNodeProps } from "../TreeNode/TreeNode";
+import { TreeNodeProps } from "./TreeNode/TreeNode";
+
+export interface Location {
+    top: number;
+    left: number;
+}
 
 export const generateTree = (
     depth: number,
     currentDepth: number,
     radius: number,
     offSetTop: number,
-    offSetLeft: number
+    offSetLeft: number,
+    isRoot: boolean
 ): TreeNodeProps | undefined => {
     if (currentDepth == depth) {
         return undefined;
@@ -13,8 +19,6 @@ export const generateTree = (
 
     let top = offSetTop;
     let left = offSetLeft;
-
-    console.log(offSetLeft);
 
     if (currentDepth === 0) {
         top = offSetTop / 2 - radius;
@@ -30,14 +34,16 @@ export const generateTree = (
         currentDepth + 1,
         radius,
         offSetTop,
-        -Math.abs(offSetLeft) / 2
+        -Math.abs(offSetLeft) / 2,
+        false
     );
     const rightNode = generateTree(
         depth,
         currentDepth + 1,
         radius,
         offSetTop,
-        Math.abs(offSetLeft) / 2
+        Math.abs(offSetLeft) / 2,
+        false
     );
 
     const node: TreeNodeProps = {
@@ -45,6 +51,7 @@ export const generateTree = (
         location: location,
         leftTreeNode: leftNode,
         rightTreeNode: rightNode,
+        isRoot: isRoot,
     };
     return node;
 };

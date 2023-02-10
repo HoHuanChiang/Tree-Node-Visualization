@@ -1,7 +1,6 @@
-import { relative } from "path";
 import React from "react";
-import TreeNode from "../TreeNode/TreeNode";
 import { generateTree } from "./Tree.util";
+import TreeNode from "./TreeNode/TreeNode";
 
 interface TreeProps {
     width: number;
@@ -18,7 +17,8 @@ const Tree = (props: TreeProps) => {
         0,
         treeNodeRadius,
         height / depth,
-        width / 2
+        width / 2,
+        true
     );
 
     return <div>{rootNodeProps && <TreeNode {...rootNodeProps} />}</div>;
