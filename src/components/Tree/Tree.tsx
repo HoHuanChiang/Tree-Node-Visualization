@@ -17,7 +17,7 @@ const Tree = (props: TreeProps) => {
         0,
         treeNodeRadius,
         height / depth,
-        width / 2,
+        width,
         true
     );
 

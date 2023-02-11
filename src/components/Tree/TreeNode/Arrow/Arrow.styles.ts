@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const ArrowContainer = styled.div`
-    width: 8px;
+    width: 4px;
     border-radius: 10px;
-    background-color: black;
+    background-color: #2b303a;
     margin-left: -4px;
     margin-top: -4px;
     transform-origin: top;
@@ -15,9 +15,9 @@ export const ArrowContainer = styled.div`
         bottom: 0;
         height: 20px;
         width: 20px;
-        border-left: 8px solid black;
-        border-bottom: 8px solid black;
-        transform: translate(4px, 4px) rotate(-45deg);
+        border-left: 4px solid #2b303a;
+        border-bottom: 4px solid #2b303a;
+        transform: translate(2px, 2px) rotate(-45deg);
         transform-origin: bottom left;
     }
 

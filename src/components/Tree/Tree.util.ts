@@ -13,7 +13,7 @@ export const generateTree = (
     offSetLeft: number,
     isRoot: boolean
 ): TreeNodeProps | undefined => {
-    if (currentDepth == depth) {
+    if (currentDepth === depth) {
         return undefined;
     }
 

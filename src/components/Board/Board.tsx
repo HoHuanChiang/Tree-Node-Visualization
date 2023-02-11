@@ -17,9 +17,11 @@ const Board = (props: BoardProps) => {
     };
 
     return (
-        <Styled.BoardContainer style={styleProps}>
-            <Tree width={width} height={height} depth={depth} />
-        </Styled.BoardContainer>
+        <Styled.BoardOuterContainer>
+            <Styled.BoardInnerContainer style={styleProps}>
+                <Tree width={width} height={height} depth={depth} />
+            </Styled.BoardInnerContainer>
+        </Styled.BoardOuterContainer>
     );
 };
 
