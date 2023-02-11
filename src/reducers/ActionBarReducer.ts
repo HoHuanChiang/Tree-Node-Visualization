@@ -2,13 +2,15 @@ import React from "react";
 import { Algorithm } from "../components/Board/Board";
 
 export interface ActionBarState {
-    isStart: boolean;
+    isStart: boolean; // start or pause
     prevClick: number;
     nextClick: number;
     depth: number;
     algorithm: Algorithm;
     hidePrevButton: boolean;
     hideNextButton: boolean;
+    autoRun: boolean;
+    resetClick: number;
 }
 
 export const initialActionBarState: ActionBarState = {
@@ -16,9 +18,11 @@ export const initialActionBarState: ActionBarState = {
     prevClick: 0,
     nextClick: 0,
     depth: 4,
-    algorithm: Algorithm.BFS,
+    algorithm: Algorithm.DFS_INORDER,
     hidePrevButton: false,
     hideNextButton: false,
+    autoRun: true,
+    resetClick: 0,
 };
 
 export enum ActionBarActionType {
@@ -28,6 +32,7 @@ export enum ActionBarActionType {
     SET_DEPTH = 3,
     HIDE_PREV_BUTTON = 4,
     HIDE_NEXT_BUTTON = 5,
+    RESET_CLICK = 6,
 }
 
 export type ActionBarPayload =
@@ -36,7 +41,8 @@ export type ActionBarPayload =
     | { action: ActionBarActionType.NEXT_CLICK }
     | { action: ActionBarActionType.SET_DEPTH; depth: number }
     | { action: ActionBarActionType.HIDE_PREV_BUTTON; isHidden: boolean }
-    | { action: ActionBarActionType.HIDE_NEXT_BUTTON; isHidden: boolean };
+    | { action: ActionBarActionType.HIDE_NEXT_BUTTON; isHidden: boolean }
+    | { action: ActionBarActionType.RESET_CLICK };
 
 export const ActionBarReducer = (
     state: ActionBarState,
@@ -74,6 +80,14 @@ export const ActionBarReducer = (
             return {
                 ...state,
                 hideNextButton: payload.isHidden,
+            };
+        case ActionBarActionType.RESET_CLICK:
+            return {
+                ...state,
+                resetClick: state.resetClick + 1,
+                isStart: false,
+                hidePrevButton: false,
+                hideNextButton: false,
             };
         default:
             return state;

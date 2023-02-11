@@ -16,7 +16,7 @@ const ROW_HEIGHT = 120;
 
 const Board = () => {
     const [actionBarState, dispatch] = React.useContext(ActionBarContext);
-    const { depth } = actionBarState;
+    const { depth, autoRun } = actionBarState;
     const styleProps: React.CSSProperties = {
         width: COLUMN_WIDTH * depth * 2,
         height: ROW_HEIGHT * depth,
@@ -35,6 +35,12 @@ const Board = () => {
         });
     };
 
+    const onResetTreeClick = () => {
+        dispatch({
+            action: ActionBarActionType.RESET_CLICK,
+        });
+    };
+
     return (
         <Styled.BoardOuterContainer>
             <Styled.BoardInnerContainer style={styleProps}>
@@ -44,6 +50,8 @@ const Board = () => {
                     actionBarState={actionBarState}
                     onHideNextButton={onHideNextButton}
                     onHidePrevButton={onHidePrevButton}
+                    autoRun={autoRun}
+                    onResetTree={onResetTreeClick}
                 />
             </Styled.BoardInnerContainer>
         </Styled.BoardOuterContainer>

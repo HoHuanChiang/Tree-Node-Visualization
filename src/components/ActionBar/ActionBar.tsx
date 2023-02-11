@@ -12,7 +12,8 @@ const MAX_DEPTH = 6;
 
 const ActionBar = () => {
     const [actionBarState, dispatch] = React.useContext(ActionBarContext);
-    const { isStart, depth, hideNextButton, hidePrevButton } = actionBarState;
+    const { isStart, depth, hideNextButton, hidePrevButton, autoRun } =
+        actionBarState;
 
     const onNextClick = () => {
         dispatch({ action: ActionBarActionType.NEXT_CLICK });
@@ -25,6 +26,10 @@ const ActionBar = () => {
     };
     const onDepthChange = (values: { x: number; y: number }) => {
         dispatch({ action: ActionBarActionType.SET_DEPTH, depth: values.x });
+    };
+
+    const onResetClick = () => {
+        dispatch({ action: ActionBarActionType.RESET_CLICK });
     };
 
     return (
@@ -44,12 +49,15 @@ const ActionBar = () => {
                 <div></div>
             </div>
             <div>
-                <input
-                    type="button"
-                    value={isStart ? "stop" : "start"}
-                    onClick={onStartClick}
-                />
-                {isStart && (
+                {!hideNextButton && (
+                    <input
+                        type="button"
+                        value={isStart ? "pause" : "start"}
+                        onClick={onStartClick}
+                    />
+                )}
+                <input type="button" value={"reset"} onClick={onResetClick} />
+                {isStart && !autoRun && (
                     <>
                         {!hideNextButton && (
                             <input

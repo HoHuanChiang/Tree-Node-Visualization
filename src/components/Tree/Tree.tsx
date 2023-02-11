@@ -8,8 +8,10 @@ interface TreeProps {
     width: number;
     height: number;
     actionBarState: ActionBarState;
+    autoRun: boolean;
     onHideNextButton: (hideButton: boolean) => void;
     onHidePrevButton: (hideButton: boolean) => void;
+    onResetTree: () => void;
 }
 
 const Tree = (props: TreeProps) => {
@@ -19,6 +21,7 @@ const Tree = (props: TreeProps) => {
         actionBarState,
         onHideNextButton,
         onHidePrevButton,
+        onResetTree,
     } = props;
     const {
         depth,
@@ -26,19 +29,60 @@ const Tree = (props: TreeProps) => {
         isStart,
         nextClick,
         prevClick,
+        resetClick,
         hidePrevButton,
         hideNextButton,
+        autoRun,
     } = actionBarState;
     const [root, setRoot] = React.useState<TreeNodeProps>();
     const [currentAlgorithm, setCurrentAlgorithm] =
         React.useState<CustomAlgorithm>(getAlgorithm(algorithm));
 
+    const setNextState = () => {
+        if (!root) {
+            return;
+        }
+        if (!currentAlgorithm.isLastStep) {
+            const nextState = { ...root };
+            currentAlgorithm.setNextState(nextState);
+            updateActionBarButton();
+            setRoot(nextState);
+        }
+    };
+
+    const setPreviousState = () => {
+        if (!root) {
+            return;
+        }
+        if (!currentAlgorithm.isFirstStep) {
+            const prevState = { ...root };
+            currentAlgorithm.setPrevState(prevState);
+            updateActionBarButton();
+            setRoot(prevState);
+        }
+    };
+
     React.useEffect(() => {
-        if (!isStart || !root) {
+        let timer: NodeJS.Timer | undefined = undefined;
+        if (!isStart && !root) {
             const newRoot = getDefaultTree(depth, width, height);
             setRoot(newRoot);
         }
-    }, [isStart, depth]);
+        if (isStart && autoRun) {
+            timer = setTimeout(setNextState, 100);
+        }
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, [isStart, depth, root, autoRun]);
+
+    React.useEffect(() => {
+        if (!isStart) {
+            const newRoot = getDefaultTree(depth, width, height);
+            setRoot(newRoot);
+        }
+    }, [depth]);
 
     React.useEffect(() => {
         const newAlgorithm = getAlgorithm(algorithm);
@@ -46,24 +90,21 @@ const Tree = (props: TreeProps) => {
     }, [algorithm]);
 
     React.useEffect(() => {
-        if (!root) {
-            return;
-        }
-        const nextState = { ...root };
-        currentAlgorithm.setNextState(nextState);
-        updateActionBarButton();
-        setRoot(nextState);
+        setNextState();
     }, [nextClick]);
+
+    React.useEffect(() => {
+        setPreviousState();
+    }, [prevClick]);
 
     React.useEffect(() => {
         if (!root) {
             return;
         }
-        const prevState = { ...root };
-        currentAlgorithm.setPrevState(prevState);
-        updateActionBarButton();
-        setRoot(prevState);
-    }, [prevClick]);
+        currentAlgorithm.reset();
+        setRoot(undefined);
+        onResetTree();
+    }, [resetClick]);
 
     const updateActionBarButton = () => {
         if (currentAlgorithm.isFirstStep && !hidePrevButton) {
