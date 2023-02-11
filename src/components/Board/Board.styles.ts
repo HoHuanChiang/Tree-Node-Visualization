@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BoardOuterContainer = styled.div`
-    height: 900px;
+    height: calc(100vh - 80px);
     position: relative;
 `;
 
@@ -12,5 +12,5 @@ export const BoardInnerContainer = styled.div`
     align-items: center;
     left: 50%;
     top: 50%;
-    transform: translate(-100%, -50%);
+    transform: translate(-50%, -50%);
 `;

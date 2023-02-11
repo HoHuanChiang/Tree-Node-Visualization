@@ -1,4 +1,5 @@
 import { Location } from "../Tree.util";
+import { TreeNodeStatus } from "./TreeNode";
 
 export const getRotateDegree = (
     parentTreeNode: Location,
@@ -20,4 +21,17 @@ export const getDistance = (location1: Location, location2: Location) => {
             Math.abs(location1.top - location2.top) *
                 Math.abs(location1.top - location2.top)
     );
+};
+
+export const getTreeNodeColor = (treeNodeStatus: TreeNodeStatus): string => {
+    switch (treeNodeStatus) {
+        case TreeNodeStatus.Unvisited:
+            return "white";
+        case TreeNodeStatus.InProgress:
+            return "grey";
+        case TreeNodeStatus.Visited:
+            return "black";
+        case TreeNodeStatus.Current:
+            return "green";
+    }
 };
