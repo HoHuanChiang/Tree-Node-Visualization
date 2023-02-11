@@ -9,6 +9,16 @@ export abstract class CustomAlgorithm {
         this.isLastStep = false;
     }
 
-    abstract setPrevState(state: TreeNodeProps): void;
-    abstract setNextState(state: TreeNodeProps): void;
+    setPrevState = (state: TreeNodeProps) => {
+        this.isFirstStep = this.setPreviousTreeNodeState(state);
+        this.isLastStep = false;
+    };
+
+    setNextState = (state: TreeNodeProps) => {
+        this.isLastStep = this.setNextTreeNodeState(state);
+        this.isFirstStep = false;
+    };
+
+    abstract setPreviousTreeNodeState(state: TreeNodeProps): boolean;
+    abstract setNextTreeNodeState(state: TreeNodeProps): boolean;
 }

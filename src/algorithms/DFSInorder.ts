@@ -5,15 +5,6 @@ import {
 import { CustomAlgorithm } from "./CustomAlgorithm";
 
 export class DFSInorder extends CustomAlgorithm {
-    setPrevState(state: TreeNodeProps): void {
-        this.isFirstStep = this.setPreviousTreeNodeState(state);
-        this.isLastStep = false;
-    }
-    setNextState(state: TreeNodeProps): void {
-        this.isLastStep = this.setNextTreeNodeState(state);
-        this.isFirstStep = false;
-    }
-
     setNextTreeNodeState = (treeNode: TreeNodeProps | undefined): boolean => {
         if (!treeNode) {
             return false;

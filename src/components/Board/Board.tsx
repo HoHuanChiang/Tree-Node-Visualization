@@ -8,7 +8,7 @@ import * as Styled from "./Board.styles";
 
 export enum Algorithm {
     DFS_INORDER = "Depth First Search (Inorder)",
-    BFD = "Breadth First Search",
+    BFS = "Breadth First Search",
 }
 
 const COLUMN_WIDTH = 120;

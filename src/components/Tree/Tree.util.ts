@@ -1,3 +1,4 @@
+import { BFS } from "../../algorithms/BFS";
 import { CustomAlgorithm } from "../../algorithms/CustomAlgorithm";
 import { DFSInorder } from "../../algorithms/DFSInorder";
 import { Algorithm } from "../Board/Board";
@@ -31,7 +32,7 @@ export const getAlgorithm = (algorithm: Algorithm): CustomAlgorithm => {
         case Algorithm.DFS_INORDER:
             return new DFSInorder();
         default:
-            return new DFSInorder();
+            return new BFS();
     }
 };
 
