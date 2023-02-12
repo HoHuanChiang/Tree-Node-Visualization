@@ -17,6 +17,7 @@ export const getDefaultTree = (
     const columns = Math.pow(2, depth);
     const treeNodeRadius = width / columns;
     const rootNodeProps = generateTree(
+        1,
         depth,
         0,
         treeNodeRadius,
@@ -36,99 +37,55 @@ export const getAlgorithm = (algorithm: Algorithm): CustomAlgorithm => {
     }
 };
 
-// export const setNextTreeNodeState = (
-//     treeNode: TreeNodeProps | undefined
-// ): boolean => {
-//     if (!treeNode) {
-//         return false;
-//     }
-//     if (treeNode.isRoot && treeNode.status === TreeNodeStatus.Unvisited) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
+export const updateTreeNodeDisablity = (id: number, root: TreeNodeProps) => {
+    // Find directions to the tree node
+    const inversedDirections: boolean[] = [];
+    let current = id;
+    while (current > 1) {
+        inversedDirections.push(current % 2 !== 0);
+        current = Math.floor(current / 2);
+    }
 
-//     if (treeNode.status === TreeNodeStatus.Current) {
-//         if (
-//             treeNode.leftTreeNode &&
-//             treeNode.leftTreeNode.status !== TreeNodeStatus.Visited
-//         ) {
-//             treeNode.leftTreeNode.status = TreeNodeStatus.Current;
-//             treeNode.status = TreeNodeStatus.InProgress;
-//             return false;
-//         } else if (
-//             treeNode.rightTreeNode &&
-//             treeNode.rightTreeNode.status !== TreeNodeStatus.Visited
-//         ) {
-//             treeNode.rightTreeNode.status = TreeNodeStatus.Current;
-//             treeNode.status = TreeNodeStatus.InProgress;
-//             return false;
-//         } else {
-//             treeNode.status = TreeNodeStatus.Visited;
-//             return true;
-//         }
-//     }
+    // Go to tree node
+    let currentTreeNode = root;
+    for (let i = inversedDirections.length - 1; i >= 0; i--) {
+        if (inversedDirections[i] && currentTreeNode.rightTreeNode) {
+            currentTreeNode = currentTreeNode.rightTreeNode;
+        } else if (!inversedDirections[i] && currentTreeNode.leftTreeNode) {
+            currentTreeNode = currentTreeNode.leftTreeNode;
+        } else {
+            throw "this is incorrect, tree not should be there!";
+        }
+    }
 
-//     var leftResponse = setNextTreeNodeState(treeNode.leftTreeNode);
-//     if (leftResponse) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
-//     var rightResponse = setNextTreeNodeState(treeNode.rightTreeNode);
-//     if (rightResponse) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
-//     return false;
-// };
+    // Disabled tree node and its children
+    if (!currentTreeNode.parentDisabled) {
+        const parentDisabled = currentTreeNode.parentDisabled;
+        disabledTreeNodeAndChildrens(
+            currentTreeNode,
+            currentTreeNode.status !== TreeNodeStatus.Disabled
+        );
+        currentTreeNode.parentDisabled = parentDisabled;
+    }
+};
 
-// export const setPreviousTreeNodeState = (
-//     treeNode: TreeNodeProps | undefined
-// ): boolean => {
-//     if (!treeNode) {
-//         return false;
-//     }
-
-//     if (treeNode.isRoot && treeNode.status === TreeNodeStatus.Visited) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
-
-//     if (treeNode.status === TreeNodeStatus.Current) {
-//         if (
-//             treeNode.rightTreeNode &&
-//             treeNode.rightTreeNode.status === TreeNodeStatus.Visited
-//         ) {
-//             treeNode.rightTreeNode.status = TreeNodeStatus.Current;
-//             treeNode.status = TreeNodeStatus.InProgress;
-//             return false;
-//         } else if (
-//             treeNode.leftTreeNode &&
-//             treeNode.leftTreeNode.status === TreeNodeStatus.Visited
-//         ) {
-//             treeNode.leftTreeNode.status = TreeNodeStatus.Current;
-//             treeNode.status = TreeNodeStatus.InProgress;
-//             return false;
-//         } else {
-//             treeNode.status = TreeNodeStatus.Unvisited;
-//             return true;
-//         }
-//     }
-
-//     var leftResponse = setPreviousTreeNodeState(treeNode.leftTreeNode);
-//     if (leftResponse) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
-//     var rightResponse = setPreviousTreeNodeState(treeNode.rightTreeNode);
-//     if (rightResponse) {
-//         treeNode.status = TreeNodeStatus.Current;
-//         return false;
-//     }
-
-//     return false;
-// };
+const disabledTreeNodeAndChildrens = (
+    treeNode: TreeNodeProps | undefined,
+    isDisabled: boolean
+) => {
+    if (!treeNode) {
+        return;
+    }
+    treeNode.parentDisabled = isDisabled;
+    treeNode.status = isDisabled
+        ? TreeNodeStatus.Disabled
+        : TreeNodeStatus.Unvisited;
+    disabledTreeNodeAndChildrens(treeNode.leftTreeNode, isDisabled);
+    disabledTreeNodeAndChildrens(treeNode.rightTreeNode, isDisabled);
+};
 
 const generateTree = (
+    id: number,
     depth: number,
     currentDepth: number,
     radius: number,
@@ -153,6 +110,7 @@ const generateTree = (
         left: left,
     };
     const leftNode = generateTree(
+        id * 2,
         depth,
         currentDepth + 1,
         radius,
@@ -161,6 +119,7 @@ const generateTree = (
         false
     );
     const rightNode = generateTree(
+        id * 2 + 1,
         depth,
         currentDepth + 1,
         radius,
@@ -170,12 +129,14 @@ const generateTree = (
     );
 
     const node: TreeNodeProps = {
+        id: id,
         radius: radius,
         location: location,
         leftTreeNode: leftNode,
         rightTreeNode: rightNode,
         isRoot: isRoot,
         status: TreeNodeStatus.Unvisited,
+        parentDisabled: false,
     };
     return node;
 };

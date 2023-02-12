@@ -6,7 +6,7 @@ import { CustomAlgorithm } from "./CustomAlgorithm";
 
 export class DFSInorder extends CustomAlgorithm {
     setNextTreeNodeState = (treeNode: TreeNodeProps | undefined): boolean => {
-        if (!treeNode) {
+        if (!treeNode || treeNode.status === TreeNodeStatus.Disabled) {
             return false;
         }
         if (treeNode.isRoot && treeNode.status === TreeNodeStatus.Unvisited) {
@@ -17,14 +17,16 @@ export class DFSInorder extends CustomAlgorithm {
         if (treeNode.status === TreeNodeStatus.Current) {
             if (
                 treeNode.leftTreeNode &&
-                treeNode.leftTreeNode.status !== TreeNodeStatus.Visited
+                treeNode.leftTreeNode.status !== TreeNodeStatus.Visited &&
+                treeNode.leftTreeNode.status !== TreeNodeStatus.Disabled
             ) {
                 treeNode.leftTreeNode.status = TreeNodeStatus.Current;
                 treeNode.status = TreeNodeStatus.InProgress;
                 return false;
             } else if (
                 treeNode.rightTreeNode &&
-                treeNode.rightTreeNode.status !== TreeNodeStatus.Visited
+                treeNode.rightTreeNode.status !== TreeNodeStatus.Visited &&
+                treeNode.rightTreeNode.status !== TreeNodeStatus.Disabled
             ) {
                 treeNode.rightTreeNode.status = TreeNodeStatus.Current;
                 treeNode.status = TreeNodeStatus.InProgress;
@@ -51,7 +53,7 @@ export class DFSInorder extends CustomAlgorithm {
     setPreviousTreeNodeState = (
         treeNode: TreeNodeProps | undefined
     ): boolean => {
-        if (!treeNode) {
+        if (!treeNode || treeNode.status === TreeNodeStatus.Disabled) {
             return false;
         }
 

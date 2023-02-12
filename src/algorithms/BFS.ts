@@ -1,4 +1,4 @@
-import {
+import TreeNode, {
     TreeNodeProps,
     TreeNodeStatus,
 } from "../components/Tree/TreeNode/TreeNode";
@@ -22,10 +22,16 @@ export class BFS extends CustomAlgorithm {
                     return true;
                 }
             }
-            if (currentTreeNode.leftTreeNode) {
+            if (
+                currentTreeNode.leftTreeNode &&
+                currentTreeNode.leftTreeNode.status !== TreeNodeStatus.Disabled
+            ) {
                 queue.push(currentTreeNode.leftTreeNode);
             }
-            if (currentTreeNode.rightTreeNode) {
+            if (
+                currentTreeNode.rightTreeNode &&
+                currentTreeNode.rightTreeNode.status !== TreeNodeStatus.Disabled
+            ) {
                 queue.push(currentTreeNode.rightTreeNode);
             }
 
@@ -49,10 +55,16 @@ export class BFS extends CustomAlgorithm {
             const currentTreeNode = queue[0];
             queue.shift();
 
-            if (currentTreeNode.leftTreeNode) {
+            if (
+                currentTreeNode.leftTreeNode &&
+                currentTreeNode.leftTreeNode.status !== TreeNodeStatus.Disabled
+            ) {
                 queue.push(currentTreeNode.leftTreeNode);
             }
-            if (currentTreeNode.rightTreeNode) {
+            if (
+                currentTreeNode.rightTreeNode &&
+                currentTreeNode.rightTreeNode.status !== TreeNodeStatus.Disabled
+            ) {
                 queue.push(currentTreeNode.rightTreeNode);
             }
 

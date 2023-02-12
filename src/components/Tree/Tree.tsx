@@ -1,7 +1,11 @@
 import React from "react";
 import { CustomAlgorithm } from "../../algorithms/CustomAlgorithm";
 import { ActionBarState } from "../../reducers/ActionBarReducer";
-import { getDefaultTree, getAlgorithm } from "./Tree.util";
+import {
+    getDefaultTree,
+    getAlgorithm,
+    updateTreeNodeDisablity,
+} from "./Tree.util";
 import TreeNode, { TreeNodeProps, TreeNodeStatus } from "./TreeNode/TreeNode";
 
 interface TreeProps {
@@ -78,10 +82,11 @@ const Tree = (props: TreeProps) => {
     }, [isStart, depth, root, autoRun]);
 
     React.useEffect(() => {
-        if (!isStart) {
-            const newRoot = getDefaultTree(depth, width, height);
-            setRoot(newRoot);
+        if (isStart) {
+            return;
         }
+        const newRoot = getDefaultTree(depth, width, height);
+        setRoot(newRoot);
     }, [depth]);
 
     React.useEffect(() => {
@@ -106,6 +111,15 @@ const Tree = (props: TreeProps) => {
         onResetTree();
     }, [resetClick]);
 
+    const onTreeNodeClick = (id: number) => {
+        if (!root) {
+            return;
+        }
+        const copyRoot = { ...root };
+        updateTreeNodeDisablity(id, root);
+        setRoot(copyRoot);
+    };
+
     const updateActionBarButton = () => {
         if (currentAlgorithm.isFirstStep && !hidePrevButton) {
             onHidePrevButton(true);
@@ -120,7 +134,11 @@ const Tree = (props: TreeProps) => {
         }
     };
 
-    return <div>{root && <TreeNode {...root} />}</div>;
+    return (
+        <div>
+            {root && <TreeNode {...root} onTreeNodeClick={onTreeNodeClick} />}
+        </div>
+    );
 };
 
 export default Tree;

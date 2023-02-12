@@ -7,33 +7,62 @@ import {
     getTreeNodeColor,
 } from "./TreeNode.util";
 import { Location } from "../Tree.util";
+import { ActionBarContext } from "../../../reducers/ActionBarReducer";
 
 export enum TreeNodeStatus {
     Unvisited = 0,
     InProgress = 1,
     Visited = 2,
     Current = 3,
+    Disabled = 4,
 }
 
 export interface TreeNodeProps {
+    id: number;
     radius: number;
     location: Location;
     leftTreeNode?: TreeNodeProps;
     rightTreeNode?: TreeNodeProps;
     isRoot: boolean;
     status: TreeNodeStatus;
+    parentDisabled: boolean;
+    onTreeNodeClick?: (id: number) => void;
 }
 
 const TreeNode = (props: TreeNodeProps) => {
-    const { radius, location, leftTreeNode, rightTreeNode, isRoot, status } =
-        props;
+    const {
+        id,
+        radius,
+        location,
+        leftTreeNode,
+        rightTreeNode,
+        isRoot,
+        status,
+        parentDisabled,
+        onTreeNodeClick,
+    } = props;
 
+    const [actionBarState] = React.useContext(ActionBarContext);
+
+    const color = status === TreeNodeStatus.Disabled ? "grey" : "black";
     const styleProps: React.CSSProperties = {
         width: radius * 2,
         height: radius * 2,
         top: location.top,
         left: location.left,
         backgroundColor: getTreeNodeColor(status),
+        borderColor: color,
+    };
+
+    const onTreeNodeContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        if (
+            !actionBarState.isStart &&
+            actionBarState.hidePrevButton &&
+            !parentDisabled
+        ) {
+            onTreeNodeClick?.(id);
+        }
     };
 
     const renderArrow = () => {
@@ -70,6 +99,7 @@ const TreeNode = (props: TreeNodeProps) => {
                 startLocation={startLocation}
                 length={arrowLength}
                 rotateDegree={rotateDegree}
+                color={color}
             />
         );
     };
@@ -77,9 +107,22 @@ const TreeNode = (props: TreeNodeProps) => {
     return (
         <>
             {renderArrow()}
-            <Styled.TreeNodeContainer style={styleProps}>
-                {leftTreeNode && <TreeNode {...leftTreeNode} />}
-                {rightTreeNode && <TreeNode {...rightTreeNode} />}
+            <Styled.TreeNodeContainer
+                style={styleProps}
+                onClick={onTreeNodeContainerClick}
+            >
+                {leftTreeNode && (
+                    <TreeNode
+                        {...leftTreeNode}
+                        onTreeNodeClick={onTreeNodeClick}
+                    />
+                )}
+                {rightTreeNode && (
+                    <TreeNode
+                        {...rightTreeNode}
+                        onTreeNodeClick={onTreeNodeClick}
+                    />
+                )}
             </Styled.TreeNodeContainer>
         </>
     );

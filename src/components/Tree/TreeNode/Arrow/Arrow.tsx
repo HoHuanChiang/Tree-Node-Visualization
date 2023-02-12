@@ -6,10 +6,11 @@ interface ArrowProps {
     startLocation: Location;
     length: number;
     rotateDegree: number;
+    color: string;
 }
 
 const Arrow = (props: ArrowProps) => {
-    const { startLocation, length, rotateDegree } = props;
+    const { startLocation, length, rotateDegree, color } = props;
 
     const arrowStyle: React.CSSProperties = {
         top: startLocation.top,
@@ -17,8 +18,12 @@ const Arrow = (props: ArrowProps) => {
         height: length,
         transform: `rotate(${rotateDegree}deg)`,
     };
-
-    return <Styled.ArrowContainer style={arrowStyle}></Styled.ArrowContainer>;
+    return (
+        <Styled.ArrowContainer
+            style={arrowStyle}
+            backgroundColor={color}
+        ></Styled.ArrowContainer>
+    );
 };
 
 export default Arrow;

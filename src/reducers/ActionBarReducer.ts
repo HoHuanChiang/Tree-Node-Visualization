@@ -18,8 +18,8 @@ export const initialActionBarState: ActionBarState = {
     prevClick: 0,
     nextClick: 0,
     depth: 4,
-    algorithm: Algorithm.DFS_INORDER,
-    hidePrevButton: false,
+    algorithm: Algorithm.BFS,
+    hidePrevButton: true,
     hideNextButton: false,
     autoRun: true,
     resetClick: 0,
@@ -53,8 +53,6 @@ export const ActionBarReducer = (
             return {
                 ...state,
                 isStart: !state.isStart,
-                hideNextButton: false,
-                hidePrevButton: true,
             };
         case ActionBarActionType.PREV_CLICK:
             return {
@@ -86,7 +84,7 @@ export const ActionBarReducer = (
                 ...state,
                 resetClick: state.resetClick + 1,
                 isStart: false,
-                hidePrevButton: false,
+                hidePrevButton: true,
                 hideNextButton: false,
             };
         default:

@@ -33,5 +33,7 @@ export const getTreeNodeColor = (treeNodeStatus: TreeNodeStatus): string => {
             return "black";
         case TreeNodeStatus.Current:
             return "green";
+        case TreeNodeStatus.Disabled:
+            return "white";
     }
 };
