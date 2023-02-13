@@ -7,8 +7,8 @@ import Tree from "../Tree/Tree";
 import * as Styled from "./Board.styles";
 
 export enum Algorithm {
-    DFS_INORDER = "Depth First Search (Inorder)",
-    BFS = "Breadth First Search",
+    DFS_INORDER = "DFS (Inorder)",
+    BFS = "BFS",
 }
 
 const COLUMN_WIDTH = 120;

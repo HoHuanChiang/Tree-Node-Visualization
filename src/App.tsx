@@ -6,6 +6,11 @@ import {
     ActionBarReducer,
     initialActionBarState,
 } from "./reducers/ActionBarReducer";
+import styled from "styled-components";
+
+const LayoutContainer = styled.div`
+    display: flex;
+`;
 
 const App = () => {
     const [state, dispatch] = React.useReducer(
@@ -14,8 +19,10 @@ const App = () => {
     );
     return (
         <ActionBarContext.Provider value={[state, dispatch]}>
-            <ActionBar />
-            <Board />
+            <LayoutContainer>
+                <Board />
+                <ActionBar />
+            </LayoutContainer>
         </ActionBarContext.Provider>
     );
 };

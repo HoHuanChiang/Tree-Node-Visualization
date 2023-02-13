@@ -1,11 +1,16 @@
 import React from "react";
 import * as Styled from "./ActionBar.styles";
 import "./ActionBar.styles";
-import Slider from "react-input-slider";
 import {
     ActionBarActionType,
     ActionBarContext,
 } from "../../reducers/ActionBarReducer";
+import { Algorithm } from "../Board/Board";
+import AlgorithmCards from "./AlgorithmCards/AlgorithmCards";
+import ReactSlider from "react-slider";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
+import "./ActionBar.css";
 
 const MIN_DEPTH = 1;
 const MAX_DEPTH = 6;
@@ -14,6 +19,7 @@ const ActionBar = () => {
     const [actionBarState, dispatch] = React.useContext(ActionBarContext);
     const { isStart, depth, hideNextButton, hidePrevButton, autoRun } =
         actionBarState;
+    const isActionBarLocked = isStart || !hidePrevButton;
 
     const onNextClick = () => {
         dispatch({ action: ActionBarActionType.NEXT_CLICK });
@@ -24,59 +30,100 @@ const ActionBar = () => {
     const onStartClick = () => {
         dispatch({ action: ActionBarActionType.START_CLICK });
     };
-    const onDepthChange = (values: { x: number; y: number }) => {
-        dispatch({ action: ActionBarActionType.SET_DEPTH, depth: values.x });
+    const onDepthChange = (value: number) => {
+        dispatch({ action: ActionBarActionType.SET_DEPTH, depth: value });
     };
-
     const onResetClick = () => {
         dispatch({ action: ActionBarActionType.RESET_CLICK });
     };
+    const onAlgorithmChange = (algorithm: Algorithm) => {
+        dispatch({
+            action: ActionBarActionType.UPDATE_ALGORITHM,
+            algorithm: algorithm,
+        });
+    };
+    const onAutoRunChange = () => {
+        dispatch({
+            action: ActionBarActionType.TOGGLE_AUTO_RUN,
+        });
+    };
 
-    return (
-        <Styled.ActionBarContainer>
-            <div>
-                <label>Depth:{depth}</label>
+    const renderActionButtons = () => {
+        const startEnabled = !isStart || autoRun;
+        const nextButtonEnabled = isStart && !autoRun && !hideNextButton;
+        const prevButtonEnabled = isStart && !autoRun && !hidePrevButton;
+        return (
+            <Styled.ActionButtonsContainer>
+                <Styled.ActionButton
+                    disabled={!startEnabled}
+                    onClick={onStartClick}
+                >
+                    {isStart ? "Pause" : "Start"}
+                </Styled.ActionButton>
+                <Styled.ActionButton onClick={onResetClick}>
+                    Reset
+                </Styled.ActionButton>
+                <Styled.ActionButton
+                    disabled={!prevButtonEnabled}
+                    onClick={onPrevClick}
+                >
+                    Previous
+                </Styled.ActionButton>
+                <Styled.ActionButton
+                    disabled={!nextButtonEnabled}
+                    onClick={onNextClick}
+                >
+                    Next
+                </Styled.ActionButton>
+            </Styled.ActionButtonsContainer>
+        );
+    };
+
+    const renderAlgorithmOptions = () => {
+        return (
+            <AlgorithmCards
+                onAlgorithmChange={onAlgorithmChange}
+                hoverDisabled={isActionBarLocked}
+            />
+        );
+    };
+
+    const renderAnimationSection = () => {
+        const disabled = isStart || !hidePrevButton;
+        return (
+            <Styled.AnimationSection>
                 <div>
-                    <Slider
-                        axis="x"
-                        xmin={MIN_DEPTH}
-                        xmax={MAX_DEPTH}
-                        x={depth}
-                        xstep={1}
+                    <label>Depth: {depth}</label>
+                    <ReactSlider
+                        className={"horizontal-slider"}
+                        thumbClassName={"thumb"}
+                        trackClassName={"track"}
+                        step={1}
+                        min={MIN_DEPTH}
+                        max={MAX_DEPTH}
+                        value={depth}
                         onChange={onDepthChange}
+                        disabled={disabled}
                     />
                 </div>
-                <div></div>
-            </div>
-            <div>
-                {!hideNextButton && (
-                    <input
-                        type="button"
-                        value={isStart ? "pause" : "start"}
-                        onClick={onStartClick}
-                    />
-                )}
-                <input type="button" value={"reset"} onClick={onResetClick} />
-                {isStart && !autoRun && (
-                    <>
-                        {!hideNextButton && (
-                            <input
-                                type="button"
-                                value="next"
-                                onClick={onNextClick}
-                            />
-                        )}
-                        {!hidePrevButton && (
-                            <input
-                                type="button"
-                                value="prev"
-                                onClick={onPrevClick}
-                            />
-                        )}
-                    </>
-                )}
-            </div>
-            <div></div>
+                <div>
+                    <label>Auto Run:</label>
+                    <div>
+                        <Toggle
+                            defaultChecked={autoRun}
+                            onChange={onAutoRunChange}
+                            className={"toggle"}
+                        />
+                    </div>
+                </div>
+            </Styled.AnimationSection>
+        );
+    };
+    return (
+        <Styled.ActionBarContainer isLocked={isActionBarLocked}>
+            {renderActionButtons()}
+            {renderAlgorithmOptions()}
+            {renderAnimationSection()}
         </Styled.ActionBarContainer>
     );
 };

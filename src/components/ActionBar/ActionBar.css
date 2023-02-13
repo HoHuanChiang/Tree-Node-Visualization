@@ -1,0 +1,47 @@
+
+.horizontal-slider {
+    width: 200px;
+    max-width: 500px;
+    height: 40px;
+}
+  
+.thumb {
+    cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    background: #ffffff;
+    border: 5px solid #067BC2;
+    border-radius: 100%;
+    display: block;
+    box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
+}
+
+.track {
+    position: relative;
+    background: #ddd;
+}
+
+.track.track-0 {
+    background: #067BC2;
+}
+
+.horizontal-slider .track {
+    top: 20px;
+    height: 4px;
+}
+
+.horizontal-slider .thumb {
+    top: 12px;
+    width: 10px;
+    outline: none;
+    height: 10px;
+    line-height: 38px;
+}
+
+.toggle {
+    margin-top: 10px;
+}
+
+.toggle.react-toggle--checked .react-toggle-track {
+    background-color: #067BC2;
+} 

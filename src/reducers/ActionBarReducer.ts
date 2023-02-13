@@ -33,6 +33,8 @@ export enum ActionBarActionType {
     HIDE_PREV_BUTTON = 4,
     HIDE_NEXT_BUTTON = 5,
     RESET_CLICK = 6,
+    UPDATE_ALGORITHM = 7,
+    TOGGLE_AUTO_RUN,
 }
 
 export type ActionBarPayload =
@@ -42,7 +44,9 @@ export type ActionBarPayload =
     | { action: ActionBarActionType.SET_DEPTH; depth: number }
     | { action: ActionBarActionType.HIDE_PREV_BUTTON; isHidden: boolean }
     | { action: ActionBarActionType.HIDE_NEXT_BUTTON; isHidden: boolean }
-    | { action: ActionBarActionType.RESET_CLICK };
+    | { action: ActionBarActionType.RESET_CLICK }
+    | { action: ActionBarActionType.UPDATE_ALGORITHM; algorithm: Algorithm }
+    | { action: ActionBarActionType.TOGGLE_AUTO_RUN };
 
 export const ActionBarReducer = (
     state: ActionBarState,
@@ -86,6 +90,16 @@ export const ActionBarReducer = (
                 isStart: false,
                 hidePrevButton: true,
                 hideNextButton: false,
+            };
+        case ActionBarActionType.UPDATE_ALGORITHM:
+            return {
+                ...state,
+                algorithm: payload.algorithm,
+            };
+        case ActionBarActionType.TOGGLE_AUTO_RUN:
+            return {
+                ...state,
+                autoRun: !state.autoRun,
             };
         default:
             return state;

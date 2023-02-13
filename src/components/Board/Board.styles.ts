@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const BoardOuterContainer = styled.div`
-    height: calc(100vh - 80px);
+    height: 100vh;
     position: relative;
+    flex: 1;
 `;
 
 export const BoardInnerContainer = styled.div`
