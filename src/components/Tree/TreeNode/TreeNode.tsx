@@ -43,6 +43,8 @@ const TreeNode = (props: TreeNodeProps) => {
     } = props;
 
     const [actionBarState] = React.useContext(ActionBarContext);
+    const [startAnimation, setAnimationStart] = React.useState<boolean>(false);
+    const nodeRef = React.useRef(null);
 
     const color = status === TreeNodeStatus.Disabled ? "grey" : "black";
     const styleProps: React.CSSProperties = {
@@ -52,7 +54,24 @@ const TreeNode = (props: TreeNodeProps) => {
         left: location.left,
         backgroundColor: getTreeNodeColor(status),
         borderColor: color,
+        opacity: startAnimation ? 1 : 0,
     };
+
+    const onAnimationStart = () => {
+        setAnimationStart(true);
+    };
+
+    React.useEffect(() => {
+        setAnimationStart(false);
+        let timer: NodeJS.Timer | undefined = setTimeout(
+            onAnimationStart,
+            id * 100
+        );
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [actionBarState.depth]);
 
     const onTreeNodeContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -100,9 +119,14 @@ const TreeNode = (props: TreeNodeProps) => {
                 length={arrowLength}
                 rotateDegree={rotateDegree}
                 color={color}
+                startAnimation={startAnimation}
             />
         );
     };
+
+    if (actionBarState.isStart && status === TreeNodeStatus.Disabled) {
+        return <></>;
+    }
 
     return (
         <>
@@ -110,6 +134,10 @@ const TreeNode = (props: TreeNodeProps) => {
             <Styled.TreeNodeContainer
                 style={styleProps}
                 onClick={onTreeNodeContainerClick}
+                ref={nodeRef}
+                className={
+                    startAnimation ? "nodeAnimation-show" : "nodeAnimation-hide"
+                }
             >
                 {leftTreeNode && (
                     <TreeNode

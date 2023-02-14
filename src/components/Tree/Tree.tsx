@@ -77,7 +77,7 @@ const Tree = (props: TreeProps) => {
         }
 
         return () => {
-            clearInterval(timer);
+            clearTimeout(timer);
         };
     }, [isStart, depth, root, autoRun]);
 
