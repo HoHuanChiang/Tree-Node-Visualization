@@ -135,9 +135,6 @@ const TreeNode = (props: TreeNodeProps) => {
                 style={styleProps}
                 onClick={onTreeNodeContainerClick}
                 ref={nodeRef}
-                className={
-                    startAnimation ? "nodeAnimation-show" : "nodeAnimation-hide"
-                }
             >
                 {leftTreeNode && (
                     <TreeNode

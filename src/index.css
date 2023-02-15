@@ -1,7 +1,8 @@
 body {
     margin: 0;
     box-sizing: border-box;
-    background-color: #A0CFD3;
+    background-color: #F1F0CC;
+    font-family: monospace;
 }
 
 .root {

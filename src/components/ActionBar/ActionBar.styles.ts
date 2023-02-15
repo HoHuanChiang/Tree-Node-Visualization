@@ -34,6 +34,7 @@ export const ActionButton = styled.button`
     margin-bottom: 12px;
     background-color: #9ad5ca;
     border-radius: 5px;
+    font-family: monospace;
 `;
 
 export const AnimationSection = styled.div`
