@@ -88,7 +88,7 @@ const ActionBar = () => {
         );
     };
 
-    const renderAnimationSection = () => {
+    const renderAnimationSettingsSection = () => {
         const disabled = isStart || !hidePrevButton;
         return (
             <Styled.AnimationSection>
@@ -123,7 +123,7 @@ const ActionBar = () => {
         <Styled.ActionBarContainer isLocked={isActionBarLocked}>
             {renderActionButtons()}
             {renderAlgorithmOptions()}
-            {renderAnimationSection()}
+            {renderAnimationSettingsSection()}
         </Styled.ActionBarContainer>
     );
 };

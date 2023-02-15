@@ -10,8 +10,21 @@ export const ActionBarContainer = styled.div.attrs(
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transform: translateX(${(props) => (props.isLocked ? "40" : "0")}px);
     transition: 0.2s ease-in transform;
+    animation: 4s slide-in ease;
+    transform: translateX(${(props) => (props.isLocked ? "40" : "0")}px);
+
+    @keyframes slide-in {
+        0% {
+            transform: translateX(280px);
+        }
+        75% {
+            transform: translateX(280px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
 `;
 
 export const ActionButtonsContainer = styled.div`
