@@ -11,10 +11,10 @@ export const ActionBarContainer = styled.div.attrs(
     flex-direction: column;
     justify-content: center;
     transition: 0.2s ease-in transform;
-    animation: 4s slide-in ease;
+    animation: 4s action-bar-slide-in ease;
     transform: translateX(${(props) => (props.isLocked ? "40" : "0")}px);
 
-    @keyframes slide-in {
+    @keyframes action-bar-slide-in {
         0% {
             transform: translateX(280px);
         }
