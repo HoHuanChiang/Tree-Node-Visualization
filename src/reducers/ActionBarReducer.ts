@@ -18,7 +18,7 @@ export const initialActionBarState: ActionBarState = {
     prevClick: 0,
     nextClick: 0,
     depth: 4,
-    algorithm: Algorithm.BFS,
+    algorithm: Algorithm.DFS_INORDER,
     hidePrevButton: true,
     hideNextButton: false,
     autoRun: true,

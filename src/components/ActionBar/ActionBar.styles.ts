@@ -4,7 +4,7 @@ export const ActionBarContainer = styled.div.attrs(
     (props: { isLocked: boolean }) => props
 )`
     width: 250px;
-    height: 100vh;
+    height: 100%;
     box-sizing: border-box;
     overflow: hidden;
     display: flex;

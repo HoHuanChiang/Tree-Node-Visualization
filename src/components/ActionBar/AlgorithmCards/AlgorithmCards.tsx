@@ -20,13 +20,13 @@ const AlgorithmCards = (props: CardsProps) => {
             backgroundColor: "#CEEC97",
             hoverRotateDegree: 0,
             algorithm: Algorithm.DFS_INORDER,
-            zIndex: 0,
+            zIndex: 1,
         },
         {
             backgroundColor: "#F4B393",
             hoverRotateDegree: 0,
             algorithm: Algorithm.BFS,
-            zIndex: 1,
+            zIndex: 0,
         },
     ]);
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BoardOuterContainer = styled.div`
-    height: 100vh;
+    height: 100%;
     position: relative;
     flex: 1;
 `;
