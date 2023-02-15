@@ -78,7 +78,8 @@ const TreeNode = (props: TreeNodeProps) => {
         if (
             !actionBarState.isStart &&
             actionBarState.hidePrevButton &&
-            !parentDisabled
+            !parentDisabled &&
+            !isRoot
         ) {
             onTreeNodeClick?.(id);
         }
