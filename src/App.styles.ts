@@ -104,6 +104,7 @@ export const TitleContainer = styled.div`
         overflow: hidden;
 
         > span {
+            font-family: "Brush Script MT";
             animation: 1s title-slide-up ease;
 
             @keyframes title-slide-up {

@@ -27,8 +27,9 @@ export const AlgorithmCard = styled.div.attrs(
     cursor: pointer;
     transition: 0.2s ease-in all;
     z-index: ${(props) => props.cardItemProps.zIndex};
-    border: 1px solid black;
-    box-shadow: 10px 5px 5px ${(props) => props.cardItemProps.backgroundColor};
+    border: 3px solid black;
+    //box-shadow: 10px 5px 5px ${(props) =>
+        props.cardItemProps.backgroundColor};
 
     &::before {
         content: "";

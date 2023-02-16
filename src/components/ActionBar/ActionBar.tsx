@@ -121,9 +121,9 @@ const ActionBar = () => {
     };
     return (
         <Styled.ActionBarContainer isLocked={isActionBarLocked}>
-            {renderActionButtons()}
             {renderAlgorithmOptions()}
             {renderAnimationSettingsSection()}
+            {renderActionButtons()}
         </Styled.ActionBarContainer>
     );
 };

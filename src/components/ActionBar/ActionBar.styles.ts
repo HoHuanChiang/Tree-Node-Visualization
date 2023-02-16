@@ -9,7 +9,6 @@ export const ActionBarContainer = styled.div.attrs(
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     transition: 0.2s ease-in transform;
     animation: 4s action-bar-slide-in ease;
     transform: translateX(${(props) => (props.isLocked ? "40" : "0")}px);
@@ -31,11 +30,11 @@ export const ActionButtonsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #adb9e3;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    box-shadow: 10px 5px 5px #adb9e3;
-    border: 1px solid black;
+    background-color: #94bfa7;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    // box-shadow: 10px 5px 5px #94bfa;
+    border: 3px solid black;
 `;
 
 export const ActionButton = styled.button`
@@ -45,18 +44,23 @@ export const ActionButton = styled.button`
     margin-right: 45px;
     margin-top: 12px;
     margin-bottom: 12px;
-    background-color: #9ad5ca;
+    background-color: #e0e0e2;
     border-radius: 5px;
     font-family: monospace;
+    font-weight: bold;
+    font-family: Arial Black;
+    border-width: 3px;
 `;
 
 export const AnimationSection = styled.div`
     width: 100%;
-    background: #84bcda;
+    background: #f3c178;
     padding: 10px;
     box-sizing: border-box;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
-    border: 1px solid black;
-    box-shadow: 10px 5px 5px #84bcda;
+    border: 3px solid black;
+    border-right-width: 0px;
+    margin-bottom: 40px;
+    //box-shadow: 10px 5px 5px #f3c178;
 `;

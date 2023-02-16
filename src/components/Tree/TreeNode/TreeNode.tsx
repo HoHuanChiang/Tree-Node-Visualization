@@ -46,7 +46,7 @@ const TreeNode = (props: TreeNodeProps) => {
     const [startAnimation, setAnimationStart] = React.useState<boolean>(false);
     const nodeRef = React.useRef(null);
 
-    const color = status === TreeNodeStatus.Disabled ? "grey" : "black";
+    const color = status === TreeNodeStatus.Disabled ? "#B0BBBF" : "black";
     const styleProps: React.CSSProperties = {
         width: radius * 2,
         height: radius * 2,
