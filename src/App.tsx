@@ -1,12 +1,11 @@
 import React from "react";
-import ActionBar from "./components/ActionBar/ActionBar";
-import Board from "./components/Board/Board";
 import {
     ActionBarContext,
     ActionBarReducer,
     initialActionBarState,
 } from "./reducers/ActionBarReducer";
-import * as Styled from "./App.styles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./components/Main/Main";
 
 const App = () => {
     const [state, dispatch] = React.useReducer(
@@ -17,17 +16,7 @@ const App = () => {
     return (
         <div className={"root"}>
             <ActionBarContext.Provider value={[state, dispatch]}>
-                <Styled.LayoutContainer>
-                    <Styled.TitleContainer>
-                        <div>
-                            <span>Tree Node Visualizer</span>
-                        </div>
-                    </Styled.TitleContainer>
-                    <Styled.ContentContainer>
-                        <Board />
-                        <ActionBar />
-                    </Styled.ContentContainer>
-                </Styled.LayoutContainer>
+                <Main />
             </ActionBarContext.Provider>
         </div>
     );
