@@ -1,3 +1,11 @@
+:root {
+    /* in miliseconds */
+    --border-animation-individual-time: 500ms;
+    --action-bar-delay-time: calc(var(--border-animation-individual-time) * 3);
+    --action-bar-slide-time: 1000ms;
+    --action-bar-total-time: calc(var(--action-bar-delay-time) + var(--action-bar-slide-time));
+}
+
 body {
     margin: 0;
     box-sizing: border-box;

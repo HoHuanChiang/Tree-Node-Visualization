@@ -10,14 +10,14 @@ export const ActionBarContainer = styled.div.attrs(
     display: flex;
     flex-direction: column;
     transition: 0.2s ease-in transform;
-    animation: 4s action-bar-slide-in ease;
+    animation: var(--action-bar-total-time) action-bar-slide-in ease;
     transform: translateX(${(props) => (props.isLocked ? "40" : "0")}px);
 
     @keyframes action-bar-slide-in {
         0% {
             transform: translateX(280px);
         }
-        75% {
+        60% {
             transform: translateX(280px);
         }
         100% {

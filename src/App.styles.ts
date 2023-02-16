@@ -17,16 +17,18 @@ export const LayoutContainer = styled.div`
         background-color: #4c5b5c;
     }
     ::after {
-        animation: 3s border-top-extend-left linear;
+        animation: calc(var(--border-animation-individual-time) * 3)
+            border-bottom-extend-left linear;
     }
 
     ::before {
         position: absolute;
         left: 50%;
-        animation: 3s border-top-extend-right linear;
+        animation: calc(var(--border-animation-individual-time) * 3)
+            border-bottom-extend-right linear;
     }
 
-    @keyframes border-top-extend-left {
+    @keyframes border-bottom-extend-left {
         0% {
             width: 0px;
         }
@@ -38,7 +40,7 @@ export const LayoutContainer = styled.div`
         }
     }
 
-    @keyframes border-top-extend-right {
+    @keyframes border-bottom-extend-right {
         0% {
             left: 100%;
             width: 0px;
@@ -68,7 +70,8 @@ export const ContentContainer = styled.div`
         width: 30px;
         background-color: #4c5b5c;
         height: 100%;
-        animation: 2s border-left-right-extend-bottom linear;
+        animation: calc(var(--border-animation-individual-time) * 2)
+            border-left-right-extend-bottom linear;
     }
 
     @keyframes border-left-right-extend-bottom {
@@ -130,15 +133,17 @@ export const TitleContainer = styled.div`
     }
 
     ::before {
-        animation: 1s border-bottom-extend-left linear;
+        animation: var(--border-animation-individual-time)
+            border-top-extend-left linear;
     }
 
     ::after {
         left: 50%;
-        animation: 1s border-bottom-extend-right linear;
+        animation: var(--border-animation-individual-time)
+            border-top-extend-right linear;
     }
 
-    @keyframes border-bottom-extend-left {
+    @keyframes border-top-extend-left {
         0% {
             left: 50%;
             width: 0;
@@ -149,7 +154,7 @@ export const TitleContainer = styled.div`
         }
     }
 
-    @keyframes border-bottom-extend-right {
+    @keyframes border-top-extend-right {
         0% {
             width: 0;
         }
