@@ -12,6 +12,7 @@ export interface ActionBarState {
     autoRun: boolean;
     resetClick: number;
     stopClick: number;
+    animationSpeed: number;
 }
 
 export const initialActionBarState: ActionBarState = {
@@ -25,6 +26,7 @@ export const initialActionBarState: ActionBarState = {
     autoRun: true,
     resetClick: 0,
     stopClick: 0,
+    animationSpeed: 100,
 };
 
 export enum ActionBarActionType {
@@ -36,8 +38,9 @@ export enum ActionBarActionType {
     HIDE_NEXT_BUTTON = 5,
     RESET_CLICK = 6,
     UPDATE_ALGORITHM = 7,
-    TOGGLE_AUTO_RUN,
-    STOP_CLICK,
+    TOGGLE_AUTO_RUN = 8,
+    STOP_CLICK = 9,
+    SET_ANIMATION_SPEED = 10,
 }
 
 export type ActionBarPayload =
@@ -50,7 +53,8 @@ export type ActionBarPayload =
     | { action: ActionBarActionType.RESET_CLICK }
     | { action: ActionBarActionType.UPDATE_ALGORITHM; algorithm: Algorithm }
     | { action: ActionBarActionType.TOGGLE_AUTO_RUN }
-    | { action: ActionBarActionType.STOP_CLICK };
+    | { action: ActionBarActionType.STOP_CLICK }
+    | { action: ActionBarActionType.SET_ANIMATION_SPEED; speed: number };
 
 export const ActionBarReducer = (
     state: ActionBarState,
@@ -112,6 +116,11 @@ export const ActionBarReducer = (
             return {
                 ...state,
                 autoRun: !state.autoRun,
+            };
+        case ActionBarActionType.SET_ANIMATION_SPEED:
+            return {
+                ...state,
+                animationSpeed: payload.speed,
             };
         default:
             return state;

@@ -7,5 +7,5 @@ export const TreeNodeContainer = styled.div`
     position: absolute;
     box-sizing: border-box;
     cursor: pointer;
-    transition: opacity 0.3s ease 0.2s, background-color 0.1s;
+    transition: opacity 0.3s ease 0.2s;
 `;

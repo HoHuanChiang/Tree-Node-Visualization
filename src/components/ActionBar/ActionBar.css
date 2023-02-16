@@ -4,6 +4,9 @@
     max-width: 500px;
     height: 40px;
 }
+
+
+
   
 .thumb {
     cursor: pointer;
@@ -25,6 +28,10 @@
     background: #067BC2;
 }
 
+.track.track-0 {
+    background: #067BC2;
+}
+
 .horizontal-slider .track {
     top: 20px;
     height: 4px;
@@ -36,6 +43,14 @@
     outline: none;
     height: 10px;
     line-height: 38px;
+}
+
+.horizontal-slider.disabled .thumb{
+    border-color: grey;
+}
+
+.horizontal-slider.disabled .track.track-0{
+    background: grey;
 }
 
 .toggle {

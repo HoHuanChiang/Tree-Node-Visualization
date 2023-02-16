@@ -14,11 +14,19 @@ import "./ActionBar.css";
 
 const MIN_DEPTH = 1;
 const MAX_DEPTH = 6;
+const MIN_SPEED = 50;
+const MAX_SPEED = 500;
 
 const ActionBar = () => {
     const [actionBarState, dispatch] = React.useContext(ActionBarContext);
-    const { isStart, depth, hideNextButton, hidePrevButton, autoRun } =
-        actionBarState;
+    const {
+        isStart,
+        depth,
+        hideNextButton,
+        hidePrevButton,
+        autoRun,
+        animationSpeed,
+    } = actionBarState;
     const isActionBarLocked = isStart || !hidePrevButton;
 
     const onNextClick = () => {
@@ -53,8 +61,15 @@ const ActionBar = () => {
         });
     };
 
+    const onAnimationSpeedChange = (value: number) => {
+        dispatch({
+            action: ActionBarActionType.SET_ANIMATION_SPEED,
+            speed: MAX_SPEED - value + MIN_SPEED,
+        });
+    };
+
     const renderActionButtons = () => {
-        const startEnabled = !isStart || autoRun;
+        const startEnabled = (!isStart || autoRun) && !hideNextButton;
         const stopEnabled = isStart || (!hideNextButton && autoRun);
         const nextButtonEnabled = isStart && !autoRun && !hideNextButton;
         const prevButtonEnabled = isStart && !autoRun && !hidePrevButton;
@@ -119,15 +134,31 @@ const ActionBar = () => {
                     />
                 </div>
                 <div>
-                    <label>Auto Run:</label>
+                    <label>Auto Run</label>
                     <div>
                         <Toggle
                             defaultChecked={autoRun}
                             onChange={onAutoRunChange}
                             className={"toggle"}
+                            disabled={disabled}
                         />
                     </div>
                 </div>
+                {autoRun && (
+                    <div style={{ marginTop: "15px" }}>
+                        <label>Animation Speed</label>
+                        <ReactSlider
+                            className={"horizontal-slider"}
+                            thumbClassName={"thumb"}
+                            trackClassName={"track"}
+                            min={MIN_SPEED}
+                            max={MAX_SPEED}
+                            value={MAX_SPEED - animationSpeed + MIN_SPEED}
+                            onChange={onAnimationSpeedChange}
+                            disabled={disabled}
+                        />
+                    </div>
+                )}
             </Styled.AnimationSection>
         );
     };

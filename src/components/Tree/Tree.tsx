@@ -38,6 +38,7 @@ const Tree = (props: TreeProps) => {
         hideNextButton,
         autoRun,
         stopClick,
+        animationSpeed,
     } = actionBarState;
     const [root, setRoot] = React.useState<TreeNodeProps>();
     const [currentAlgorithm, setCurrentAlgorithm] =
@@ -74,13 +75,13 @@ const Tree = (props: TreeProps) => {
             setRoot(newRoot);
         }
         if (isStart && autoRun) {
-            timer = setTimeout(setNextState, 100);
+            timer = setTimeout(setNextState, animationSpeed);
         }
 
         return () => {
             clearTimeout(timer);
         };
-    }, [isStart, depth, root, autoRun]);
+    }, [isStart, depth, root, autoRun, animationSpeed]);
 
     React.useEffect(() => {
         if (isStart) {
