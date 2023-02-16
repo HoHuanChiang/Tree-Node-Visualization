@@ -47,6 +47,8 @@ const TreeNode = (props: TreeNodeProps) => {
     const nodeRef = React.useRef(null);
 
     const color = status === TreeNodeStatus.Disabled ? "#B0BBBF" : "black";
+    const isHidden =
+        actionBarState.isStart && status === TreeNodeStatus.Disabled;
     const styleProps: React.CSSProperties = {
         width: radius * 2,
         height: radius * 2,
@@ -55,6 +57,7 @@ const TreeNode = (props: TreeNodeProps) => {
         backgroundColor: getTreeNodeColor(status),
         borderColor: color,
         opacity: startAnimation ? 1 : 0,
+        visibility: isHidden ? "hidden" : "visible",
     };
 
     const onAnimationStart = () => {
@@ -121,13 +124,10 @@ const TreeNode = (props: TreeNodeProps) => {
                 rotateDegree={rotateDegree}
                 color={color}
                 startAnimation={startAnimation}
+                isHidden={isHidden}
             />
         );
     };
-
-    if (actionBarState.isStart && status === TreeNodeStatus.Disabled) {
-        return <></>;
-    }
 
     return (
         <>

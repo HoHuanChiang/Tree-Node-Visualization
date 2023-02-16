@@ -1,4 +1,7 @@
-import { TreeNodeProps } from "../components/Tree/TreeNode/TreeNode";
+import {
+    TreeNodeProps,
+    TreeNodeStatus,
+} from "../components/Tree/TreeNode/TreeNode";
 
 export abstract class CustomAlgorithm {
     isFirstStep: boolean;
@@ -19,9 +22,20 @@ export abstract class CustomAlgorithm {
         this.isFirstStep = false;
     };
 
-    reset = () => {
+    reset = (root?: TreeNodeProps) => {
         this.isFirstStep = true;
         this.isLastStep = false;
+        this.clearAllState(root);
+    };
+
+    clearAllState = (root?: TreeNodeProps) => {
+        if (!root || root.status === TreeNodeStatus.Disabled) {
+            return;
+        }
+
+        root.status = TreeNodeStatus.Unvisited;
+        this.clearAllState(root.leftTreeNode);
+        this.clearAllState(root.rightTreeNode);
     };
 
     abstract setPreviousTreeNodeState(state: TreeNodeProps): boolean;

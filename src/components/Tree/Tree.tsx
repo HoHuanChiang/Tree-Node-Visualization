@@ -37,6 +37,7 @@ const Tree = (props: TreeProps) => {
         hidePrevButton,
         hideNextButton,
         autoRun,
+        stopClick,
     } = actionBarState;
     const [root, setRoot] = React.useState<TreeNodeProps>();
     const [currentAlgorithm, setCurrentAlgorithm] =
@@ -110,6 +111,15 @@ const Tree = (props: TreeProps) => {
         setRoot(undefined);
         onResetTree();
     }, [resetClick]);
+
+    React.useEffect(() => {
+        if (!root) {
+            return;
+        }
+        const resetRoot = { ...root };
+        currentAlgorithm.reset(resetRoot);
+        setRoot(resetRoot);
+    }, [stopClick]);
 
     const onTreeNodeClick = (id: number) => {
         if (!root) {

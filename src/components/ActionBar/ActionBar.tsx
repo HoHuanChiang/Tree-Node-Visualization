@@ -47,9 +47,15 @@ const ActionBar = () => {
             action: ActionBarActionType.TOGGLE_AUTO_RUN,
         });
     };
+    const onStopClick = () => {
+        dispatch({
+            action: ActionBarActionType.STOP_CLICK,
+        });
+    };
 
     const renderActionButtons = () => {
         const startEnabled = !isStart || autoRun;
+        const stopEnabled = isStart || (!hideNextButton && autoRun);
         const nextButtonEnabled = isStart && !autoRun && !hideNextButton;
         const prevButtonEnabled = isStart && !autoRun && !hidePrevButton;
         return (
@@ -59,6 +65,12 @@ const ActionBar = () => {
                     onClick={onStartClick}
                 >
                     {isStart ? "Pause" : "Start"}
+                </Styled.ActionButton>
+                <Styled.ActionButton
+                    disabled={!stopEnabled}
+                    onClick={onStopClick}
+                >
+                    {"Stop"}
                 </Styled.ActionButton>
                 <Styled.ActionButton onClick={onResetClick}>
                     Reset
