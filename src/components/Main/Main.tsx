@@ -19,7 +19,7 @@ const Main = () => {
             disableBeacon: true,
         },
         {
-            content: "Manage your settings here",
+            content: "Manage your tree node settings here",
             target: ".settings",
             placement: "left",
             disableBeacon: true,
@@ -69,9 +69,10 @@ const Main = () => {
                 callback={onJoyrideCallback}
                 styles={{
                     options: {
-                        primaryColor: "#35281d",
+                        primaryColor: "var(--instruction-primary-color)",
                     },
                 }}
+                locale={{ last: "End" }}
             />
         </Styled.LayoutContainer>
     );
