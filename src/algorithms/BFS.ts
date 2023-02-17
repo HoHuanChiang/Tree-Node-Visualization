@@ -1,4 +1,4 @@
-import TreeNode, {
+import {
     TreeNodeProps,
     TreeNodeStatus,
 } from "../components/Tree/TreeNode/TreeNode";
