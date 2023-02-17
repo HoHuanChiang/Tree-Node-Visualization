@@ -41,6 +41,13 @@ const Board = () => {
         });
     };
 
+    const onInstructionButtonClick = () => {
+        dispatch({
+            action: ActionBarActionType.SHOW_INSTRUCTION,
+            visible: true,
+        });
+    };
+
     return (
         <Styled.BoardOuterContainer>
             <Styled.BoardInnerContainer style={styleProps}>
@@ -54,6 +61,9 @@ const Board = () => {
                     onResetTree={onResetTreeClick}
                 />
             </Styled.BoardInnerContainer>
+            <Styled.InstructionButton onClick={onInstructionButtonClick}>
+                &#63;
+            </Styled.InstructionButton>
         </Styled.BoardOuterContainer>
     );
 };

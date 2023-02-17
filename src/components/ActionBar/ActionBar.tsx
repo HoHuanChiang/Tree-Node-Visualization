@@ -70,7 +70,7 @@ const ActionBar = () => {
 
     const renderActionButtons = () => {
         const startEnabled = (!isStart || autoRun) && !hideNextButton;
-        const stopEnabled = isStart || (!hideNextButton && autoRun);
+        const stopEnabled = isStart || (autoRun && !hidePrevButton);
         const nextButtonEnabled = isStart && !autoRun && !hideNextButton;
         const prevButtonEnabled = isStart && !autoRun && !hidePrevButton;
         return (
