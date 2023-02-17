@@ -4,16 +4,56 @@
     --action-bar-delay-time: calc(var(--border-animation-individual-time) * 3);
     --action-bar-slide-time: 1000ms;
     --action-bar-total-time: calc(var(--action-bar-delay-time) + var(--action-bar-slide-time));
+
+    /* colors */
+    --body-background-color: #E9F1F7;
+
+    --settings-border-color: black;
+    --algorithm-card-hole-color: white;
+    --dfs-card-color: #D1D2F9;
+    --bfs-card-color: #A3BCF9;
+
+    --slide-circle-inner-color: white;
+    --slide-primary-color: #067BC2;
+    --slide-disabled-color: grey;
+    --slide-unvisited-track-color: #ddd;
+
+    --action-container-background-color: #94bfa7;
+    --action-buttons-background-color: #e0e0e2;
+
+    --animation-settings-background-color: #f3c178;
+
+    --instruction-color: #35281d;
+
+    --main-border-color: #4c5b5c;
+    --main-title-color: #4c5b5c;
+    --main-title-background-color: #f1f0cc;
+
+    --instruction-primary-color: #4c5b5c;
+
+    --treeNode-border-color: black;
+    --treeNode-border-color-disabled: #B0BBBF;
+    --treeNode-unvisited-background: white;
+    --treeNode-inprogress-background: grey;
+    --treeNode-visited-background: black;
+    --treeNode-current-background: green;
+    --treeNode-disabled-background: white;
 }
 
 body {
     margin: 0;
     box-sizing: border-box;
-    background-color: #E9F1F7;
+    background-color: var(--body-background-color);
     font-family: Arial Black;
     font-weight: bold;
     font-size: 13px;
     overflow: hidden;
+}
+
+button {
+    font-family: Arial Black;
+    font-weight: bold;
+    font-size: 13px !important;
 }
 
 .root {

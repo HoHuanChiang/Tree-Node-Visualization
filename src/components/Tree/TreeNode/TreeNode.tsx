@@ -47,7 +47,10 @@ const TreeNode = (props: TreeNodeProps) => {
     const nodeRef = React.useRef(null);
 
     const isInstructionNode = id === 3;
-    const color = status === TreeNodeStatus.Disabled ? "#B0BBBF" : "black";
+    const color =
+        status === TreeNodeStatus.Disabled
+            ? "var(--treeNode-border-color-disabled)"
+            : "var(--treeNode-border-color)";
     const isHidden =
         actionBarState.isStart && status === TreeNodeStatus.Disabled;
     const styleProps: React.CSSProperties = {

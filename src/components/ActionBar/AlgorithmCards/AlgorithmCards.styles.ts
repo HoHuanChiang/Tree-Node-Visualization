@@ -27,13 +27,13 @@ export const AlgorithmCard = styled.div.attrs(
     cursor: pointer;
     transition: 0.2s ease-in all;
     z-index: ${(props) => props.cardItemProps.zIndex};
-    border: 3px solid black;
-    //box-shadow: 10px 5px 5px ${(props) =>
+    border: 3px solid var(--settings-border-color);
+    // box-shadow: 10px 5px 5px ${(props) =>
         props.cardItemProps.backgroundColor};
 
     &::before {
         content: "";
-        background-color: white;
+        background-color: var(--algorithm-card-hole-color);
         width: 15px;
         height: 15px;
         position: absolute;
@@ -41,6 +41,6 @@ export const AlgorithmCard = styled.div.attrs(
         right: 20px;
         transform: translateY(-50%);
         border-radius: 50%;
-        border: 1px solid black;
+        border: 1px solid var(--settings-border-color);
     }
 `;

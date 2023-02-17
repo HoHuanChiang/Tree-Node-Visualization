@@ -30,11 +30,11 @@ export const ActionButtonsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #94bfa7;
+    background-color: var(--action-container-background-color);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    // box-shadow: 10px 5px 5px #94bfa;
-    border: 3px solid black;
+    // box-shadow: 10px 5px 5px var(--action-container-background-color);
+    border: 3px solid var(--settings-border-color);
 `;
 
 export const ActionButton = styled.button`
@@ -44,23 +44,20 @@ export const ActionButton = styled.button`
     margin-right: 45px;
     margin-top: 12px;
     margin-bottom: 12px;
-    background-color: #e0e0e2;
+    background-color: var(--action-buttons-background-color);
     border-radius: 5px;
-    font-family: monospace;
-    font-weight: bold;
-    font-family: Arial Black;
     border-width: 3px;
 `;
 
 export const AnimationSection = styled.div`
     width: 100%;
-    background: #f3c178;
+    background: var(--animation-settings-background-color);
     padding: 10px;
     box-sizing: border-box;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
-    border: 3px solid black;
+    border: 3px solid var(--settings-border-color);
     border-right-width: 0px;
     margin-bottom: 40px;
-    //box-shadow: 10px 5px 5px #f3c178;
+    //box-shadow: 10px 5px 5px var(--animation-settings-background-color);
 `;

@@ -28,14 +28,15 @@ export const InstructionButton = styled.div`
     align-items: center;
     font-size: 40px;
     border-radius: 50%;
-    border: 3px solid #35281d;
-    color: #35281d;
-    transition: background-color 0.3s, color 0.3s;
+    border: 3px solid var(--instruction-color);
+    color: var(--instruction-color);
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
     animation: var(--action-bar-total-time) instruction-slide-in ease;
 
     :hover {
-        background-color: #35281d;
+        background-color: var(--instruction-color);
         color: white;
+        transform: rotate(360deg);
     }
 
     @keyframes instruction-slide-in {

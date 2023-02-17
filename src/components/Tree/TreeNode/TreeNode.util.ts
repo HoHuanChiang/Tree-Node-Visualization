@@ -26,14 +26,14 @@ export const getDistance = (location1: Location, location2: Location) => {
 export const getTreeNodeColor = (treeNodeStatus: TreeNodeStatus): string => {
     switch (treeNodeStatus) {
         case TreeNodeStatus.Unvisited:
-            return "white";
+            return "var(--treeNode-unvisited-background)";
         case TreeNodeStatus.InProgress:
-            return "grey";
+            return "var(--treeNode-inprogress-background)";
         case TreeNodeStatus.Visited:
-            return "black";
+            return "var(--treeNode-visited-background)";
         case TreeNodeStatus.Current:
-            return "green";
+            return "var(--treeNode-current-background)";
         case TreeNodeStatus.Disabled:
-            return "white";
+            return "var(--treeNode-disabled-background)";
     }
 };

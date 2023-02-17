@@ -14,7 +14,7 @@ export const LayoutContainer = styled.div`
         bottom: 0;
         left: 0;
         width: 50%;
-        background-color: #4c5b5c;
+        background-color: var(--main-border-color);
     }
     ::after {
         animation: calc(var(--border-animation-individual-time) * 3)
@@ -68,7 +68,7 @@ export const ContentContainer = styled.div`
         content: "";
         position: relative;
         width: 30px;
-        background-color: #4c5b5c;
+        background-color: var(--main-border-color);
         height: 100%;
         animation: calc(var(--border-animation-individual-time) * 2)
             border-left-right-extend-bottom linear;
@@ -96,9 +96,9 @@ export const TitleContainer = styled.div`
     position: relative;
 
     > div {
-        color: #4c5b5c;
+        color: var(--main-title-color);
         font-size: 30px;
-        background-color: #f1f0cc;
+        background-color: var(--main-title-background-color);
         height: 80%;
         display: flex;
         align-items: center;
@@ -129,7 +129,7 @@ export const TitleContainer = styled.div`
         top: 0;
         left: 0;
         width: 50%;
-        background-color: #4c5b5c;
+        background-color: var(--main-border-color);
         height: 100%;
     }
 

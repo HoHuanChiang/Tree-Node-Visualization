@@ -4,16 +4,13 @@
     max-width: 500px;
     height: 40px;
 }
-
-
-
   
 .thumb {
     cursor: pointer;
     position: absolute;
     z-index: 100;
-    background: #ffffff;
-    border: 5px solid #067BC2;
+    background: var(--slide-circle-inner-color);
+    border: 5px solid var(--slide-primary-color);
     border-radius: 100%;
     display: block;
     box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
@@ -21,15 +18,11 @@
 
 .track {
     position: relative;
-    background: #ddd;
+    background: var(--slide-unvisited-track-color);
 }
 
 .track.track-0 {
-    background: #067BC2;
-}
-
-.track.track-0 {
-    background: #067BC2;
+    background: var(--slide-primary-color);
 }
 
 .horizontal-slider .track {
@@ -46,11 +39,11 @@
 }
 
 .horizontal-slider.disabled .thumb{
-    border-color: grey;
+    border-color: var(--slide-disabled-color);
 }
 
 .horizontal-slider.disabled .track.track-0{
-    background: grey;
+    background: var(--slide-disabled-color);
 }
 
 .toggle {
@@ -58,5 +51,5 @@
 }
 
 .toggle.react-toggle--checked .react-toggle-track {
-    background-color: #067BC2;
+    background-color: var(--slide-primary-color);
 } 

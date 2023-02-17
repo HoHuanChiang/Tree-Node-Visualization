@@ -17,13 +17,13 @@ const AlgorithmCards = (props: CardsProps) => {
     const { hoverDisabled, onAlgorithmChange } = props;
     const [cardItems, setCardItems] = React.useState<CardItemProps[]>([
         {
-            backgroundColor: "#D1D2F9",
+            backgroundColor: "var(--dfs-card-color)",
             hoverRotateDegree: 0,
             algorithm: Algorithm.DFS_INORDER,
             zIndex: 1,
         },
         {
-            backgroundColor: "#A3BCF9",
+            backgroundColor: "var(--bfs-card-color)",
             hoverRotateDegree: 0,
             algorithm: Algorithm.BFS,
             zIndex: 0,
