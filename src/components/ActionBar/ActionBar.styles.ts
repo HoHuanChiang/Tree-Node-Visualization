@@ -45,7 +45,7 @@ export const ActionButton = styled.button`
     margin-top: 12px;
     margin-bottom: 12px;
     background-color: var(--action-buttons-background-color);
-    border-radius: 5px;
+    border-radius: 20px;
     border-width: 3px;
 `;
 
