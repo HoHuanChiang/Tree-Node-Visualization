@@ -27,7 +27,7 @@ export const initialActionBarState: ActionBarState = {
     autoRun: true,
     resetClick: 0,
     stopClick: 0,
-    animationSpeed: 100,
+    animationSpeed: 150,
     showInstruction: false,
 };
 

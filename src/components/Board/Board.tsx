@@ -7,7 +7,7 @@ import Tree from "../Tree/Tree";
 import * as Styled from "./Board.styles";
 
 export enum Algorithm {
-    DFS_INORDER = "DFS (Inorder)",
+    DFS_INORDER = "DFS",
     BFS = "BFS",
 }
 
