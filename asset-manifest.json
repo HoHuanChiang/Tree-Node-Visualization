@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Tree-Node-Visualizer/static/css/main.e2c45b5a.css",
-    "main.js": "/Tree-Node-Visualizer/static/js/main.540edaa7.js",
+    "main.js": "/Tree-Node-Visualizer/static/js/main.57a386fb.js",
     "index.html": "/Tree-Node-Visualizer/index.html",
     "main.e2c45b5a.css.map": "/Tree-Node-Visualizer/static/css/main.e2c45b5a.css.map",
-    "main.540edaa7.js.map": "/Tree-Node-Visualizer/static/js/main.540edaa7.js.map"
+    "main.57a386fb.js.map": "/Tree-Node-Visualizer/static/js/main.57a386fb.js.map"
   },
   "entrypoints": [
     "static/css/main.e2c45b5a.css",
-    "static/js/main.540edaa7.js"
+    "static/js/main.57a386fb.js"
   ]
 }
