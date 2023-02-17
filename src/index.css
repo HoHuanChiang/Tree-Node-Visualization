@@ -13,6 +13,7 @@ body {
     font-family: Arial Black;
     font-weight: bold;
     font-size: 13px;
+    overflow: hidden;
 }
 
 .root {

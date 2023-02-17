@@ -32,7 +32,6 @@ export const InstructionButton = styled.div`
     color: #35281d;
     transition: background-color 0.3s, color 0.3s;
     animation: var(--action-bar-total-time) instruction-slide-in ease;
-    z-index: -1;
 
     :hover {
         background-color: #35281d;

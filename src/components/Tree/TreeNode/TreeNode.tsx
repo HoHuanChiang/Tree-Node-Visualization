@@ -46,6 +46,7 @@ const TreeNode = (props: TreeNodeProps) => {
     const [startAnimation, setAnimationStart] = React.useState<boolean>(false);
     const nodeRef = React.useRef(null);
 
+    const isInstructionNode = id === 3;
     const color = status === TreeNodeStatus.Disabled ? "#B0BBBF" : "black";
     const isHidden =
         actionBarState.isStart && status === TreeNodeStatus.Disabled;
@@ -128,7 +129,6 @@ const TreeNode = (props: TreeNodeProps) => {
             />
         );
     };
-
     return (
         <>
             {renderArrow()}
@@ -136,6 +136,7 @@ const TreeNode = (props: TreeNodeProps) => {
                 style={styleProps}
                 onClick={onTreeNodeContainerClick}
                 ref={nodeRef}
+                className={isInstructionNode ? "instructionNode" : ""}
             >
                 {leftTreeNode && (
                     <TreeNode

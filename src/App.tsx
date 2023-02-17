@@ -4,7 +4,6 @@ import {
     ActionBarReducer,
     initialActionBarState,
 } from "./reducers/ActionBarReducer";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./components/Main/Main";
 
 const App = () => {

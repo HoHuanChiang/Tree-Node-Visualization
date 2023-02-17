@@ -12,7 +12,7 @@ import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import "./ActionBar.css";
 
-const MIN_DEPTH = 1;
+const MIN_DEPTH = 2;
 const MAX_DEPTH = 6;
 const MIN_SPEED = 50;
 const MAX_SPEED = 500;
@@ -74,7 +74,7 @@ const ActionBar = () => {
         const nextButtonEnabled = isStart && !autoRun && !hideNextButton;
         const prevButtonEnabled = isStart && !autoRun && !hidePrevButton;
         return (
-            <Styled.ActionButtonsContainer>
+            <Styled.ActionButtonsContainer className={"actionBoard"}>
                 <Styled.ActionButton
                     disabled={!startEnabled}
                     onClick={onStartClick}
@@ -118,7 +118,7 @@ const ActionBar = () => {
     const renderAnimationSettingsSection = () => {
         const disabled = isStart || !hidePrevButton;
         return (
-            <Styled.AnimationSection>
+            <Styled.AnimationSection className={"settings"}>
                 <div>
                     <label>Depth: {depth}</label>
                     <ReactSlider

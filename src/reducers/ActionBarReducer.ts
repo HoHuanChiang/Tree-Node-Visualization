@@ -28,7 +28,7 @@ export const initialActionBarState: ActionBarState = {
     resetClick: 0,
     stopClick: 0,
     animationSpeed: 100,
-    showInstruction: true,
+    showInstruction: false,
 };
 
 export enum ActionBarActionType {

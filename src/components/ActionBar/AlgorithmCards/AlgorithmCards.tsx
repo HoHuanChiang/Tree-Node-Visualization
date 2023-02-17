@@ -76,7 +76,7 @@ const AlgorithmCards = (props: CardsProps) => {
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >
-                {cardItems.map((x) => {
+                {cardItems.map((x, index) => {
                     return (
                         <Styled.AlgorithmCard
                             key={x.algorithm}
@@ -84,6 +84,7 @@ const AlgorithmCards = (props: CardsProps) => {
                             onClick={() => {
                                 onCardClick(x.algorithm);
                             }}
+                            className={index === 0 ? "instructionCard" : ""}
                         >
                             {x.algorithm}
                         </Styled.AlgorithmCard>

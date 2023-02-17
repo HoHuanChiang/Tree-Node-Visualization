@@ -72,6 +72,7 @@ export const ContentContainer = styled.div`
         height: 100%;
         animation: calc(var(--border-animation-individual-time) * 2)
             border-left-right-extend-bottom linear;
+        z-index: 1;
     }
 
     @keyframes border-left-right-extend-bottom {
