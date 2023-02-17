@@ -27,6 +27,7 @@ const ActionBar = () => {
         autoRun,
         animationSpeed,
     } = actionBarState;
+    const [maxDepth, setMaxDepth] = React.useState<number>(MAX_DEPTH);
     const isActionBarLocked = isStart || !hidePrevButton;
 
     const onNextClick = () => {
@@ -67,6 +68,30 @@ const ActionBar = () => {
             speed: MAX_SPEED - value + MIN_SPEED,
         });
     };
+
+    React.useEffect(() => {
+        const handleResize = () => {
+            const windowWidth = window.innerWidth;
+            let updateMaxDepth = 4;
+            if (windowWidth > 1830) {
+                updateMaxDepth = 6;
+            } else if (windowWidth > 1550) {
+                updateMaxDepth = 5;
+            }
+
+            setMaxDepth(updateMaxDepth);
+
+            if (depth > updateMaxDepth) {
+                onDepthChange(updateMaxDepth);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [depth]);
 
     const renderActionButtons = () => {
         const startEnabled = (!isStart || autoRun) && !hideNextButton;
@@ -127,7 +152,7 @@ const ActionBar = () => {
                         trackClassName={"track"}
                         step={1}
                         min={MIN_DEPTH}
-                        max={MAX_DEPTH}
+                        max={maxDepth}
                         value={depth}
                         onChange={onDepthChange}
                         disabled={disabled}
@@ -162,6 +187,7 @@ const ActionBar = () => {
             </Styled.AnimationSection>
         );
     };
+
     return (
         <Styled.ActionBarContainer isLocked={isActionBarLocked}>
             {renderAlgorithmOptions()}
