@@ -63,10 +63,15 @@ const Main = () => {
                 disableCloseOnEsc={true}
                 run={actionBarState.showInstruction}
                 hideCloseButton={true}
-                showProgress={true}
                 showSkipButton={true}
                 steps={instructionSteps}
+                disableOverlayClose={true}
                 callback={onJoyrideCallback}
+                styles={{
+                    options: {
+                        primaryColor: "#35281d",
+                    },
+                }}
             />
         </Styled.LayoutContainer>
     );
