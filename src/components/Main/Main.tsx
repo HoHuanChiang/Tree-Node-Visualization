@@ -11,6 +11,10 @@ import {
 const Main = () => {
     const [actionBarState, dispatch] = React.useContext(ActionBarContext);
 
+    React.useEffect(() => {
+        document.title = "Tree Node Visualizer";
+    }, []);
+
     const instructionSteps: Step[] = [
         {
             content: "Hover to choose your algorithm",
